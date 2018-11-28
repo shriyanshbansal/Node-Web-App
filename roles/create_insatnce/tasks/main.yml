@@ -2,6 +2,8 @@
   ec2_group:
     name: "{{ action }}_security_group"
     description: "{{ action }} security group"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ region }}"
     rules:
       - proto: all
@@ -14,6 +16,8 @@
 - name: Create an EC2 key
   ec2_key:
     name: "{{ action }}-key"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     region: "{{ region }}"
   register: ec2_key
 
@@ -23,6 +27,8 @@
 
 - name: Create an EC2 instance
   ec2:
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     key_name: "{{ action }}-key"
     region: "{{ region }}"
     group_id: "{{ test_firewall.group_id }}"
